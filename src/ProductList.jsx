@@ -1,9 +1,11 @@
 import React, { useState,useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
+    const [addedToCart, setAddedToCart] = useState({});
 
     const plantsArray = [
         {
@@ -296,5 +298,26 @@ const handlePlantsClick = (e) => {
     </div>
     );
 }
+const handleAddToCart = (product) => {
+  dispatch(addItem(product));
+  setAddedToCart((prevState) => ({
+     ...prevState,
+     [product.name]: true
+   }));
+};
+const store = configureStore({
+    reducer: {
+        cart: cartReducer,
+    },
+});
+export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
+
+const handleCheckoutShopping = (e) => {
+  alert('Functionality to be added');
+};
+
+
+import { Provider } from 'react-redux';
 
 export default ProductList;
+
